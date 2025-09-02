@@ -1,24 +1,31 @@
 let wins = 0;
 let loses = 0;
-let gameOver = false;
 let lastCaughtMoleIndex = null;
 const holes = document.querySelectorAll('[id^="hole"]');
 const deadMolesElement = document.getElementById("dead");
 const lostMolesElement = document.getElementById("lost");
 
-function stopGame() {
-    playing = false;
+function resetGame() {
+    wins = 0;
+    loses = 0;
+    lastCaughtMoleIndex = null;
+    resetStatistics();
+}
+
+function resetStatistics() {
+    deadMolesElement.textContent = wins;
+    lostMolesElement.textContent = loses;
 }
 
 function checkGameOver() {
-    if(playing && wins >= 10) {
+    if(wins >= 10) {
         alert("Победа!")
-    } else if(playing && loses >= 5) {
+    } else if(loses >= 5) {
         alert("Поражение!") 
-    } else if(playing) {
+    } else {
         return;
     }
-    stopGame();
+    resetGame();
 }
 
 function coughtMole() {
@@ -26,13 +33,10 @@ function coughtMole() {
     if(moleIndex !== lastCaughtMoleIndex)  // защита от читинга (двойного клика на того же крота)
         ++wins;
     lastCaughtMoleIndex = moleIndex;
-
-    deadMolesElement.textContent = wins;
 }
 
 function missedMole() {
     ++loses;
-    lostMolesElement.textContent = loses;
 }
 
 function handleClick() {
@@ -42,6 +46,7 @@ function handleClick() {
     else
         missedMole.call(this);
     checkGameOver();
+    resetStatistics();
 }
 
 holes.forEach(hole => hole.addEventListener("click", handleClick));
