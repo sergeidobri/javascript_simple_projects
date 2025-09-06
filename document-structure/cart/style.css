@@ -64,9 +64,6 @@ input:focus {
 }
 
 .card {
-  display: flex;
-  justify-content: center;
-  gap: 40px;
   width: 400px;
   padding: 20px 30px;
   margin: 0 auto 30px;
@@ -105,59 +102,94 @@ button:hover {
   background-color: #005ce6;
 }
 
-.dropdown {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
+body {
+  font-family: Arial;
+}
+.cart__products {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cart__product {
   position: relative;
-  font-family: Helvetica;
-  font-weight: 300;
 }
-
-.dropdown__value {
-  color: #fff;
-  background: gray;
-  box-sizing: border-box;
-  padding: 10px;
-  display: inline-block;
-  cursor: pointer;
-  border-radius: 6px;
-}
-
-.dropdown__value:after {
-  content: '\21E9';
-  margin-left: 5px;
-}
-
-.dropdown__list {
-  display: none;
+.cart__product-count {
   position: absolute;
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-  /* top: 100%; */
-  /* left: 145px; */
-  border: 1px solid gray;
-  border-bottom: none;
-  border-radius: 4px;
+  top: 0;
+  right: 0;
+  border: 2px solid green;
+  border-radius: 50%;
+  padding: 2px 5px;
 }
 
-.dropdown__link {
-  display: block;
-  text-decoration: none;
-  color: black;
+.cart__product-image {
+  border-radius: 6px;
+  margin-right: 10px;
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
+.product {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+.product__title {
+  width: 100%;
+  text-transform: uppercase;
+}
+
+.product__image {
+  width: 100px;
+  object-fit: contain;
+}
+
+.product__quantity-title {
+  text-transform: uppercase;
+}
+
+.product__quantity-controls {
+  display: flex;
+  margin: 10px 0;
+  justify-content: center;
+  align-items: center;
+}
+
+.product__quantity-control {
   padding: 5px 10px;
   box-sizing: border-box;
-  border-bottom: 1px solid gray;
-  border-radius: 4px;
-  background-color: #fff;
+  cursor: pointer;
+  border: 1px solid gray;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
 }
 
-.dropdown__list_active {
-  display: block;
+.product__quantity-control:hover {
+  background: gray;
+  color: #fff;
 }
 
-.card {
-  text-align: center;
-  height: 400px;
+.product__quantity-value {
+  box-sizing: border-box;
+  padding: 0 10px;
+}
+
+.product__add {
+  background: green;
+  padding: 10px 20px;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.product__add:hover {
+  opacity: 0.8;
+}
+
+.product-shadow {
+  position: absolute;
 }

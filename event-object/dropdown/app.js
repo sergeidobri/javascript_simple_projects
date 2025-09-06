@@ -1,16 +1,23 @@
-const lstButton = document.querySelector(".dropdown__value");
-const dropdownList = document.querySelector(".dropdown__list");
+const lstButtons = document.querySelectorAll(".dropdown__value");
+const dropdownsList = document.querySelectorAll(".dropdown__list");
 
-function handleListToggleVisibility() {
-    dropdownList.classList.toggle("dropdown__list_active");
+function changeListVisibility(lst) {
+    lst.classList.toggle("dropdown__list_active");
+}
+
+function handleClick(event) {
+    changeListVisibility(event.target.nextElementSibling);
 }
 
 function setNewValue(event) {
     event.preventDefault();  // это отключит перенаправление и обновление стр.
+
     const newValue = event.target.textContent;
-    lstButton.textContent = newValue;
-    handleListToggleVisibility();
+    const targetList = event.target.closest(".dropdown__list");
+    targetList.previousElementSibling.textContent = newValue;
+    
+    changeListVisibility(targetList);
 }
 
-lstButton.addEventListener("click", handleListToggleVisibility);
-Array.from(dropdownList.children).forEach(lstItem => lstItem.addEventListener("click", setNewValue));
+lstButtons.forEach(btn => btn.addEventListener("click", handleClick));
+dropdownsList.forEach(lst => Array.from(lst.children).forEach(lstItem => lstItem.addEventListener("click", setNewValue)));
