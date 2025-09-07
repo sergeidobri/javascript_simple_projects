@@ -121,6 +121,7 @@ body {
   border: 2px solid green;
   border-radius: 50%;
   padding: 2px 5px;
+  cursor: pointer;
 }
 
 .cart__product-image {
@@ -130,6 +131,11 @@ body {
   height: 100px;
   object-fit: contain;
 }
+
+.cart.hide {
+  display: none;
+}
+
 .product {
   display: flex;
   flex-wrap: wrap;
@@ -192,4 +198,15 @@ body {
 
 .product-shadow {
   position: absolute;
+}
+
+.cart__product-count__decrease {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 2px 5px;
+  font-size: 16px;
+  color: rgb(234, 0, 0);
+  font-weight: 700;
+  cursor: pointer;
 }
