@@ -101,34 +101,25 @@ button {
 button:hover {
   background-color: #005ce6;
 }
-
-.header {
-  margin-bottom: 20px;
+body {
+  font-family: Arial;
+}
+.item {
+  display: flex;
 }
 
-.has-tooltip {
-  color: #000;
-  background: yellow;
-  position: relative;
+.item__code {
+  margin-right: 5px;
+  font-weight: bold;
+}
+.item__value {
+  margin-right: 5px;
 }
 
-.has-tooltip:hover {
-  color: red;
+.loader {
+  width: 100px;
+  display: none;
 }
-
-.tooltip {
-  position: absolute;
-  display: inline-block;
-  background: black;
-  padding: 5px;
-  border-radius: 5px;
-  color: #fff;
-  z-index: 1;
-  text-wrap: nowrap;
-  transform: translateY(-20%);
-  opacity: 0;
-}
-
-.tooltip_active {
-  opacity: 1;
+.loader_active {
+  display: block;
 }

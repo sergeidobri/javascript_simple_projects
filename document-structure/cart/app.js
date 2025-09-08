@@ -47,31 +47,25 @@ function changeQuantity(event) {
 }
 
 function createProduct(productProto) {
-    const productForCart = document.createElement("div");
-    productForCart.className = "cart__product";
-    productForCart.dataset.id = productProto.dataset.id;
+    cartProducts.insertAdjacentHTML("beforeend", `
+        <div class="cart__product" data-id="${productProto.dataset.id}">
+            <img class="cart__product-image" src="${productProto.querySelector(".product__image").src}">
+            <div class="cart__product-count">${productProto.querySelector(".product__quantity-value").innerText}</div>
+            <div class="cart__product-count__decrease">-1</div>
+        </div>
+    `)
 
-    const productImage = document.createElement("img");
-    productImage.className = "cart__product-image";
-    productImage.src = productProto.querySelector(".product__image").src;
+    const newProduct = cartProducts.lastElementChild;
 
-    const productQuantity = document.createElement("div");
-    productQuantity.className = "cart__product-count";
-    productQuantity.innerText = productProto.querySelector(".product__quantity-value").innerText;
+    const productQuantity = newProduct.querySelector(".cart__product-count");
     productQuantity.addEventListener("click", removeProductFromCart);
     productQuantity.addEventListener("mouseover", showRemoveButton);
     productQuantity.addEventListener("mouseout", hideRemoveButton);
 
-    const decreaseQuantityBtn = document.createElement("div");
-    decreaseQuantityBtn.className = "cart__product-count__decrease";
-    decreaseQuantityBtn.innerText = "-1";
+    const decreaseQuantityBtn = newProduct.querySelector(".cart__product-count__decrease");
     decreaseQuantityBtn.addEventListener("click", decreaseCartQuantity);
 
-    productForCart.append(productImage);
-    productForCart.append(productQuantity);
-    productForCart.append(decreaseQuantityBtn);
-
-    return productForCart;
+    return newProduct;
 }
 
 // cart
@@ -84,7 +78,6 @@ function pushProductToCart(event) {
     let newProduct;
     if(productIndex === -1) {
         newProduct = createProduct(productToAdd);
-        cartProducts.append(newProduct);
     } else {
         newProduct = cartProducts.children[productIndex];
         const productInCartQuantity = getCountElementOfProduct(Array.from(cartProducts.children)[productIndex]);
@@ -144,7 +137,6 @@ function loadCartFromLocalStorage() {
         const productProto = getProductById(prodInCart.id);
         const newProduct = createProduct(productProto);
         getCountElementOfProduct(newProduct).innerText = prodInCart.quantity;
-        cartProducts.append(newProduct);
     });
 }
 

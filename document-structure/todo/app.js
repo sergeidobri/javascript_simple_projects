@@ -16,25 +16,16 @@ function handleClick(event) {
 
 // work with TODOs
 function createTodo(txt) {
-    // text
-    const todoText = document.createElement("div");
-    todoText.className = "task__title";
-    todoText.innerText = txt;
+    tasksList.insertAdjacentHTML('beforeend', `
+        <div class="task">
+            <div class="task__title">
+                ${txt}
+            </div>
+            <a href="#" class="task__remove">&times;</a>
+        </div>
+    `);
 
-    // btn
-    const removeBtn = document.createElement("a");
-    removeBtn.className = "task__remove";
-    removeBtn.href = "#";
-    removeBtn.innerText = `×`;  // ошибка с &times;
-    removeBtn.addEventListener("click", deleteTodo);
-
-    // element (text + btn)
-    const todo = document.createElement("div");
-    todo.className = "task";
-    todo.append(todoText);
-    todo.append(removeBtn);
-
-    tasksList.append(todo);
+    tasksList.lastElementChild.querySelector(".task__remove").addEventListener("click", deleteTodo);
 }
 
 function deleteTodo(event) {
